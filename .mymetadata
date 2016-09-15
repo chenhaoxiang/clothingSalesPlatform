@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="onlyClothing"
+  id="myeclipse.1473947867449"
+  context-root="/onlyClothing"
+  j2ee-spec="6.0"
+  archive="onlyClothing.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

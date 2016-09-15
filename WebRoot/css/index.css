@@ -1,0 +1,40 @@
+head{
+	margin-bottom: 0pt;
+}
+body{
+	margin-left:30pt;
+	margin-top:10pt;
+	margin-right: 30pt;
+}
+.userFont{
+	color: gray;
+	font: bold;
+}
+
+.rightDiv{
+	float:right;
+	text-align: right;
+}
+.biaoti{
+	color:red;
+	font-size:25;
+	float: left;
+}
+hr{
+	clear: right;
+}
+:link{
+	color: gray;
+}
+
+:visited{
+	color: gray;
+}
+
+:hover{
+	color: red;
+}
+
+:active{
+	color: gray;
+}
