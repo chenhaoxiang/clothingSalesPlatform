@@ -1,17 +1,10 @@
 $(document).ready(function(){
 	
-	//获取JS传递的语言参数
-	var utils = new Utils();
-	var args = utils.getScriptArgs();	
-	
 	
 	//隐藏Loading/注册失败 DIV
 	$(".loading").hide();
 	$(".login-error").hide();
 	registError = $("<label class='error repeated'></label>");
-	
-	//加载国际化语言包资源
-	utils.loadProperties(args.lang);
 	
 	//输入框激活焦点、移除焦点
 	jQuery.focusblur = function(focusid) {
@@ -145,7 +138,39 @@ function regist(validate){
 	if(validate.form()){
 		if($("#checkBox").attr("checked")){
 			$.ajax({
-				url: "/RegisterServlet",//注册请求的Servlet
+                cache: true,
+                type: "POST",
+                url:path+"/RegisterServlet",
+                data:$('#signupForm').serialize(),// form表单的id
+                async: false,
+                error: function(request) {
+                    alert("连接错误！");
+                },
+                success: function(data) {
+                	alert("data:"+data);
+                	$('.loading').hide();
+					if(data.hasOwnProperty("msg")){//hasOwnProperty方法,用来判断一个属性是否存在于某对象的键中
+						if(data.msg == '0'){
+							//注册成功
+							window.location.href = "succ.jsp?email="+$('#email').val();
+						}else if(data.msg == '1'){
+							//数据库链接失败
+							$(".login-error").html("数据库链接失败");
+						}else if(data.msg == '2'){
+							//参数传递失败
+							alert("参数传递失败");
+							$(".login-error").show();
+							$(".login-error").html("参数传递失败");
+						}else if(data.msg == '3'){
+							//系统错误
+							$(".login-error").html("系统错误");
+						}
+					}
+                }
+            });
+			/*
+			$.ajax({
+				url: path+"/RegisterServlet", //注册请求的Servlet
 				type: "post",//请求方式
 				data: {
 					userID: $("#email").val(),
@@ -169,13 +194,14 @@ function regist(validate){
 							//参数传递失败
 							$(".login-error").show();
 							$(".login-error").html($.i18n.prop("参数传递失败"));
+							
 						}else{
 							//系统错误
 							$(".login-error").html($.i18n.prop("系统错误"));
 						}
 					}
 				}
-			});
+			});*/
 		}else{
 			//勾选隐私政策和服务条款
 			$(".login-error").show();
@@ -183,27 +209,3 @@ function regist(validate){
 		}
 	}
 }
-
-var Utils = function(){};
-
-Utils.prototype.loadProperties = function(lang){
-	jQuery.i18n.properties({// 加载资浏览器语言对应的资源文件
-		name:'ApplicationResources',
-		language: lang,
-		path:'resources/i18n/',
-		mode:'map',
-		callback: function() {// 加载成功后设置显示内容
-		} 
-	});	
-};
-
-Utils.prototype.getScriptArgs = function(){//获取多个参数
-    var scripts=document.getElementsByTagName("script"),
-    //因为当前dom加载时后面的script标签还未加载，所以最后一个就是当前的script
-    script=scripts[scripts.length-1],
-    src=script.src,
-    reg=/(?:\?|&)(.*?)=(.*?)(?=&|$)/g,
-    temp,res={};
-    while((temp=reg.exec(src))!=null) res[temp[1]]=decodeURIComponent(temp[2]);
-    return res;
-};

@@ -9,8 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
 <link rel="shortcut icon" href="resources/images/favicon.ico" />
+
 <link href="resources/style/style.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript"
 	src="resources/js/jquery.i18n.properties-1.0.9.js"></script>
@@ -18,6 +21,10 @@
 	src="resources/js/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript" src="resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="resources/js/page_regist.js?lang=zh"></script>
+
+<script type="text/javascript">
+  		var path = "<c:url value='/'/>";
+</script>
 
 </head>
 <body class="loginbody">
@@ -91,6 +98,7 @@
 					<div class="row btnArea">
 						<a class="login-btn" id="submit">注册</a>
 					</div>
+					
 				</form>
 			</div>
 			<div class="go-regist">
