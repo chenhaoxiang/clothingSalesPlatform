@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.parser.JSONToken;
+
 import cn.hncu.utils.BaseServlet;
 
 /**
@@ -26,26 +30,24 @@ public class RegisterServlet extends BaseServlet {
 
 	@Override
 	public void execute(HttpServletRequest requset, HttpServletResponse response) {
+		response.setContentType("text/html");
+		
 		String name = requset.getParameter("name");
 		String password = requset.getParameter("password");
 		String email = requset.getParameter("email");
 		PrintWriter out=null;
-		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			out = response.getWriter();
 		} catch (IOException e) {
-			map.put("code", "3");
+			//str=str+"code=3";
 			e.printStackTrace();
 		}
-		
 		if(name==null||name.trim().equals("")
 			||password==null||password.trim().equals("")
 			||email==null||email.trim().equals("")
 			){
-			out.print("2");
 		}
-		
-		out.print(map);
+		out.print("1");
 		log.error(name+","+password+","+email);
 	}
 

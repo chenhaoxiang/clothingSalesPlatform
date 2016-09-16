@@ -137,6 +137,8 @@ function regist(validate){
 	//校验Email, password，校验如果失败的话不提交
 	if(validate.form()){
 		if($("#checkBox").attr("checked")){
+			//var url=path+"/RegisterServlet";
+			//$post();
 			$.ajax({
                 cache: true,
                 type: "POST",
@@ -148,24 +150,21 @@ function regist(validate){
                 },
                 success: function(data) {
                 	alert("data:"+data);
-                	$('.loading').hide();
-					if(data.hasOwnProperty("msg")){//hasOwnProperty方法,用来判断一个属性是否存在于某对象的键中
-						if(data.msg == '0'){
+                	$('.loading').hide();//隐藏显示的元素
+						if(data == '0'){
 							//注册成功
 							window.location.href = "succ.jsp?email="+$('#email').val();
-						}else if(data.msg == '1'){
+						}else if(data == '1'){
 							//数据库链接失败
-							$(".login-error").html("数据库链接失败");
-						}else if(data.msg == '2'){
+							alert("数据库链接失败");
+						}else if(data == 2){
 							//参数传递失败
 							alert("参数传递失败");
 							$(".login-error").show();
-							$(".login-error").html("参数传递失败");
-						}else if(data.msg == '3'){
+						}else if(data == 3){
 							//系统错误
-							$(".login-error").html("系统错误");
+							alert("系统错误");
 						}
-					}
                 }
             });
 			/*
