@@ -20,8 +20,9 @@ public class IndexDaoImpl implements IIndexDAO {
 	@Override
 	public List<Clothing> findMassesRecommendClothing() {
 		List<Clothing> lists = new ArrayList<Clothing>();
-
-		// TODO Auto-generated method stub
+		String sql = "select id,name,parentId,grade from types";
+		QueryRunner run = new QueryRunner(C3p0Pool.getDataSource());
+		lists = run.query(sql,new BeanListHandler<Clothing>(Clothing.class));
 		return lists;
 	}
 
@@ -38,7 +39,6 @@ public class IndexDaoImpl implements IIndexDAO {
 		// TODO Auto-generated method stub
 		return lists;
 	}
-	
 	
 	//查询所有的服装类型
 	@Override
